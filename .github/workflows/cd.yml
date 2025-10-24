@@ -41,7 +41,7 @@ jobs:
         run: gcloud info
 
       - name: Run database migrations
-        run: npm run migrate
+        run: npm run db:migrate
 
       - name: Build and push Docker image
         run: |
