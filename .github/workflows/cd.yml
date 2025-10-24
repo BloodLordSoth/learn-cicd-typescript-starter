@@ -4,6 +4,7 @@ on:
   push:
     branches: [ main ]
 
+
 jobs:
   deploy:
     name: Deploy
@@ -24,6 +25,8 @@ jobs:
       - name: Build app
         run: npm run build
 
+        env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Authenticate with GCP
         id: auth
@@ -37,6 +40,8 @@ jobs:
       - name: Verify gcloud installation
         run: gcloud info
 
+      - name: Run database migrations
+        run: npm run migrate
 
       - name: Build and push Docker image
         run: |
